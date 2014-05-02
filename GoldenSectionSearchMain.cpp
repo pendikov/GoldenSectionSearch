@@ -9,6 +9,7 @@
 
 #include "GoldenSectionSearchMain.h"
 #include <wx/msgdlg.h>
+#include "expression_parser.h"
 
 //(*InternalHeaders(GoldenSectionSearchFrame)
 #include <wx/intl.h>
@@ -42,6 +43,9 @@ wxString wxbuildinfo(wxbuildinfoformat format)
 }
 
 //(*IdInit(GoldenSectionSearchFrame)
+const long GoldenSectionSearchFrame::ID_TEXTCTRL1 = wxNewId();
+const long GoldenSectionSearchFrame::ID_BUTTON1 = wxNewId();
+const long GoldenSectionSearchFrame::ID_STATICTEXT1 = wxNewId();
 const long GoldenSectionSearchFrame::idMenuQuit = wxNewId();
 const long GoldenSectionSearchFrame::idMenuAbout = wxNewId();
 const long GoldenSectionSearchFrame::ID_STATUSBAR1 = wxNewId();
@@ -62,6 +66,9 @@ GoldenSectionSearchFrame::GoldenSectionSearchFrame(wxWindow* parent,wxWindowID i
     wxMenu* Menu2;
 
     Create(parent, id, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxDEFAULT_FRAME_STYLE, _T("id"));
+    TextCtrl1 = new wxTextCtrl(this, ID_TEXTCTRL1, wxEmptyString, wxPoint(56,176), wxDefaultSize, 0, wxDefaultValidator, _T("ID_TEXTCTRL1"));
+    Button1 = new wxButton(this, ID_BUTTON1, _("OK"), wxPoint(224,176), wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON1"));
+    StaticText1 = new wxStaticText(this, ID_STATICTEXT1, _("Enter a function and the program will try to find the extremum: "), wxPoint(48,24), wxSize(168,32), 0, _T("ID_STATICTEXT1"));
     MenuBar1 = new wxMenuBar();
     Menu1 = new wxMenu();
     MenuItem1 = new wxMenuItem(Menu1, idMenuQuit, _("Quit\tAlt-F4"), _("Quit the application"), wxITEM_NORMAL);
@@ -79,6 +86,7 @@ GoldenSectionSearchFrame::GoldenSectionSearchFrame(wxWindow* parent,wxWindowID i
     StatusBar1->SetStatusStyles(1,__wxStatusBarStyles_1);
     SetStatusBar(StatusBar1);
 
+    Connect(ID_BUTTON1,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&GoldenSectionSearchFrame::OnButton1Click);
     Connect(idMenuQuit,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&GoldenSectionSearchFrame::OnQuit);
     Connect(idMenuAbout,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&GoldenSectionSearchFrame::OnAbout);
     //*)
@@ -99,4 +107,10 @@ void GoldenSectionSearchFrame::OnAbout(wxCommandEvent& event)
 {
     wxString msg = wxbuildinfo(long_f);
     wxMessageBox(msg, _("Welcome to..."));
+}
+
+void GoldenSectionSearchFrame::OnButton1Click(wxCommandEvent& event)
+{
+    const char * test = "x + (x-453 * 4)";
+    parse_expression(test);
 }
