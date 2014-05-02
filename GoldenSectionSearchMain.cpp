@@ -111,6 +111,6 @@ void GoldenSectionSearchFrame::OnAbout(wxCommandEvent& event)
 
 void GoldenSectionSearchFrame::OnButton1Click(wxCommandEvent& event)
 {
-    const char * test = "x + (x-453 * 4)";
+    const char * test = "x + (x-453.45837 * 4)";
     parse_expression(test);
 }

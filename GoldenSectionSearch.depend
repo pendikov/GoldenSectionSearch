@@ -1799,7 +1799,7 @@
 	"wx/list.h"
 	"wx/dynarray.h"
 
-1399040849 source:e:\github\cpp\goldensectionsearch\goldensectionsearchmain.cpp
+1399045905 source:e:\github\cpp\goldensectionsearch\goldensectionsearchmain.cpp
 	"GoldenSectionSearchMain.h"
 	<wx/msgdlg.h>
 	"expression_parser.h"
